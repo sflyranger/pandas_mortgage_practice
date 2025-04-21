@@ -23,7 +23,7 @@ dti_ratio = np.random.normal(35,10,n).round(2) # Setting the dti ratio as a norm
 
 loan_status = np.random.choice(['Current', 'Delinquent', 'Default', 'Paid Off'],n, p = [0.75, 0.05, 0.05, 0.15]) # Setting the loan status indicator by choice given a probability setting
 
-origination_date = pd.to_datetime(np.random.choice(pd.date_range('1995-01-01', '2024-12-31')),n) # Randomly generating origination dates
+origination_date = pd.to_datetime(np.random.choice(pd.date_range('1995-01-01', '2024-12-31'),n)) # Randomly generating origination dates
 
 states = ['TX', 'FL', 'CA', 'NY', 'KY', 'PA', 'IL', 'OK', 'GA', 'MA', 'NC', 'MI']
 
@@ -45,6 +45,30 @@ df = pd.DataFrame({
     'origination_date': origination_date, 
     'state': state, 
 })
+
+
+# Including some missing indices 
+missing_portion = 0.1
+
+# Randomly selecting the indices to have missing values
+missing_indices = np.random.choice(df.index, int(len(df) * missing_portion), replace = False)
+
+# Making the indices missing in some specific columns
+df.loc[missing_indices, 'borrower_income'] = np.nan
+df.loc[missing_indices, 'credit_score'] = np.nan
+df.loc[missing_indices, 'dti_ratio'] = np.nan
+
+
+# Including some duplicates
+n_duplicates = int(0.03* len(df))
+
+# Sample rows to duplicate
+duplicate_rows = df.sample(n_duplicates, random_state=42)
+
+# Reappend the rows back
+df = pd.concat([df, duplicate_rows], ignore_index=True)
+
+
 
 # Exporting to a CSV
 df.to_csv('mortgage_data.csv', index=False)
