@@ -1,0 +1,5 @@
+loan_status,loan_amount_avg_by_loan_status,dti_ratio_avg_by_loan_status,ltv_ratio_avg_by_loan_status,credit_score_avg_by_loan_status,property_value_avg_by_loan_status,interest_rate_avg_by_loan_status
+Current,303369.76,35.16,74.44,649.53,412674.58,4.25
+Default,313337.64,35.26,74.31,665.98,424742.1,4.21
+Delinquent,316965.78,37.56,77.3,653.92,416098.19,4.24
+Paid Off,307372.05,35.46,75.62,652.86,413813.21,4.29
